@@ -130,21 +130,11 @@ private:
             return config.release();
         }
 
-        chain.addFile(Process::location(Process::DataLocation, "config.json"));
+        chain.addFile(Process::location(Process::DataLocation, ".config.json"));
         if (read(chain, config)) {
             return config.release();
         }
-
-        chain.addFile(Process::location(Process::HomeLocation,  "." APP_ID ".json"));
-        if (read(chain, config)) {
-            return config.release();
-        }
-
-        chain.addFile(Process::location(Process::HomeLocation, ".config" XMRIG_DIR_SEPARATOR APP_ID ".json"));
-        if (read(chain, config)) {
-            return config.release();
-        }
-
+        
 #       ifdef XMRIG_FEATURE_EMBEDDED_CONFIG
         chain.addRaw(default_config);
 
